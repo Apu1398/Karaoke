@@ -1,0 +1,74 @@
+<h2>Register</h2>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              style="width: 500px"
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="pass">Contraseña</label>
+            <input
+              style="width: 500px"
+              type="text"
+              id="pass"
+              formControlName="pass"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input
+              style="width: 500px"
+              type="email"
+              id="email"
+              formControlName="email"
+              class="form-control"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="roles"
+              formControlName="roles"
+            />
+            <label style="margin-left: 15px;" class="form-check-label" for="roles">
+              Premium
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+      <div class="form-group">
+        <button [disabled]="!userForm.valid" class="btn btn-primary">Register</button>
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

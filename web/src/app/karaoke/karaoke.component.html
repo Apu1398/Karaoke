@@ -1,0 +1,44 @@
+<h1>Canciones</h1>
+<nav class="navbar">
+    <input class="form-control" type="text" name="songName" [(ngModel)]="songName" (ngModelChange)="searchSongName()"
+    placeholder="Busca tu canción por su nombre">
+</nav>
+
+<nav class="navbar">
+    <input class="form-control" type="text" name="songArtist" [(ngModel)]="songArtist" (ngModelChange)="searchSongArtist()"
+    placeholder="Busca tu canción por su artista">
+</nav>
+<nav class="navbar">
+    <input class="form-control" type="text" name="songAlbum" [(ngModel)]="songAlbum" (ngModelChange)="searchSongAlbum()"
+    placeholder="Busca tu canción por su album">
+</nav>
+<nav class="navbar">
+    <input class="form-control" type="text" name="songLyric" [(ngModel)]="songLyric" (ngModelChange)="searchSongLyrics()"
+    placeholder="Busca tu canción por fragmentos de su letra">
+</nav>
+<hr>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Canción</th>
+            <th>Artista</th>
+            <th>Albúm</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor= "let cancion of canciones">
+                <td>{{cancion.name}}</td>
+                <td>{{cancion.artist}}</td>
+                <td>{{cancion.album}}</td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<nav class="navbar">
+    <input class="form-control" type="text" name="songID" [(ngModel)]="songID" (ngModelChange)="getLyrics()"
+    placeholder="Ingresa el ID de tu cancion">
+</nav>
+<button class="btn btn-primary" (click)="getLyrics()" style="padding: 10px;">Ingresar ID</button>
+
+<button class="btn btn-primary" (click)="playMusic()" style="padding: 10px; margin-left: 50px;">Play Music</button>
+<button class="btn btn-primary" (click)="stopMusic()" style="padding: 10px; margin-left: 50px;">Stop Music</button>

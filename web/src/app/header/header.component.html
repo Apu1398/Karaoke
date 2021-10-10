@@ -1,0 +1,29 @@
+<div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a (click)="logout()" class="navbar-brand" href="login">Karaoke</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              
+              <li *ngIf="this.loginService.login" class="nav-item">
+                <a class="nav-link" routerLink="gestion-canciones">Gestión de Canciones</a>
+              </li>
+              <li *ngIf="this.loginService.login" class="nav-item">
+                <a class="nav-link" routerLink="karaoke">Karaoke</a>
+              </li>
+              
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              
+                <li *ngIf="this.loginService.login"  class="nav-item">
+                  <a (click)="logout()" class="nav-link" routerLink="login">Logout</a>
+                </li>
+              </ul>
+            
+          </div>
+        </div>
+      </nav>
+</div>

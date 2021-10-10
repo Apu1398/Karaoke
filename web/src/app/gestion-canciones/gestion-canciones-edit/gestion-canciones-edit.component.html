@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="cancionForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="!cancionForm.valid"
+          >
+            Guardar
+          </button>
+          <button type="button" class="btn btn-danger" (click)="onCancel()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="name">Nombre de la canción</label>
+            <input
+              type="text"
+              id="name"
+              formControlName="name"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="artist">Nombre del artista</label>
+            <input
+              type="text"
+              id="artist"
+              formControlName="artist"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="album">Nombre del albúm</label>
+            <input
+              type="text"
+              id="album"
+              formControlName="album"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="url">URL</label>
+            <input
+              type="text"
+              id="url"
+              formControlName="url"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="lyrics">Letra</label>
+            <input
+              type="text"
+              id="lyrics"
+              formControlName="lyrics"
+              class="form-control"
+            />
+          </div>
+        </div>
+      </div>
+      <hr />
+    </form>
+  </div>
+</div>

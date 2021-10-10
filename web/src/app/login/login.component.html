@@ -1,0 +1,35 @@
+<h2
+style="padding-top: 20px;"
+>Login Cliente</h2>
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)"> 
+    <div class="form-group">
+        <label for="email">E-Mail</label>
+        <input 
+        style="width: 500px"
+        type="email" 
+        id="email"
+        class="form-control"
+        ngModel
+        name="email"
+        
+        email>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+        style="width: 500px"
+        type="pass" 
+        id="pass"
+        class="form-control"
+        ngModel
+        name="pass"
+        
+        minlength="6">
+    </div>
+    <div class="form-group">
+        <button style="margin-top: 20px;"  class="btn btn-primary">
+            Login
+        </button>
+        <a style="margin-top: 15px;" routerLink="/register" class="btn btn-link">Register</a>
+    </div>
+</form>
