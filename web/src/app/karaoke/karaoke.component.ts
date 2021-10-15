@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Cancion } from '../models/cancion.model';
 import { CancionService } from '../services/cancion.service';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-karaoke',
@@ -11,7 +12,9 @@ import { CancionService } from '../services/cancion.service';
 })
 export class KaraokeComponent implements OnInit {
 
+  ready: boolean = false;
   canciones: Cancion[];
+  cancion: Cancion;
   subscription: Subscription;
   songName: any;
   songArtist: any;
@@ -20,7 +23,8 @@ export class KaraokeComponent implements OnInit {
   songID: any;
   audio = new Audio();
 
-  constructor(private cancionService: CancionService,) { }
+  constructor(private cancionService: CancionService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
     this.subscription = this.cancionService.cancionesChanged
@@ -30,6 +34,21 @@ export class KaraokeComponent implements OnInit {
         }
       );
     this.canciones = this.cancionService.getCanciones();
+    this.dataStorageService.fetchCanciones().
+    subscribe( canciones => {
+        
+        this.cancionService.setCanciones(canciones);
+        
+    });
+  }
+
+  actualizar(){
+    this.dataStorageService.fetchCanciones().
+      subscribe( canciones => {
+          this.canciones = canciones;
+          this.cancionService.setCanciones(this.canciones);
+          
+      });
   }
 
   searchSongName() {
@@ -70,15 +89,21 @@ export class KaraokeComponent implements OnInit {
   }
 
   playMusic() {
-    this.audio.src = "../assets/song.mp3";
+    //this.audio.src = this.dataStorageService.getCancion(this.cancion.url);
+     
     this.audio.load();
     this.audio.play();
   }
   stopMusic() {
     this.audio.pause();
   }
-  getLyrics() {
-    
+  getCancion() {
+    this.cancionService.getCancionByID(this.songID);
+    this.cancion = this.cancionService.getCancionX();
+    console.log(this.cancion)
+    this.ready = true;
   }
+
+ 
 
 }

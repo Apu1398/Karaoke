@@ -5,15 +5,23 @@ import { Cancion } from "../models/cancion.model";
 import { User } from "../models/user.model";
 import { CancionService } from "../services/cancion.service";
 import { map, tap } from 'rxjs/operators';
+import { LoginService } from "../services/login.service";
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
 
-    httpOptions = {
-        headers: new HttpHeaders({ 'Content-Type': 'application/json'})};
+    
+  headers: HttpHeaders = new HttpHeaders({
+    "Content-Type" : "application/json",
+    "x-access-token": localStorage.getItem("token")
+    });
+        
+    
+
 
     constructor(private http: HttpClient,
-                private cancionService: CancionService) {
+                private cancionService: CancionService,
+                private loginService: LoginService) {
 
     }
 
@@ -32,7 +40,7 @@ export class DataStorageService {
     this.http
     .post(
       'http://localhost:8080/api/auth/signup',
-      body, this.httpOptions
+      body, {headers:this.headers}
     )
     .subscribe(response => {
       console.log(response);
@@ -48,10 +56,11 @@ export class DataStorageService {
   */
    sendLoginInfo(username: string, password: string): Observable<User>{
     const body = { username: username, password: password };
+    
     return this.http
     .post<User>(
-      'http://localhost:8080/api/auth/signup',
-      body, this.httpOptions
+      'http://localhost:8080/api/auth/signin',
+      body, {headers:this.headers}
     )     
   }
 
@@ -66,10 +75,11 @@ export class DataStorageService {
   * @description Updates song
   */
   updateCancion(cancion: Cancion) {
+   console.log(cancion)
     this.http
       .put(
-        'http://localhost:8080/api/update_song/' + cancion.id_song,
-        cancion
+        'http://localhost:8080/api/update_song/' + cancion._id,
+        cancion, {headers:this.headers}
       )
       .subscribe(response => {
         console.log(response);
@@ -83,7 +93,7 @@ export class DataStorageService {
   * @description Deletes a song 
   */
   deleteSong(song_id: string) {
-    this.http.delete<Cancion>('http://localhost:8080/api/delete_song/614a6a3bf05dc4b30f9ffb24' + song_id, this.httpOptions).subscribe();
+    this.http.delete<Cancion>('http://localhost:8080/api/delete_song/' + song_id, {headers:this.headers}).subscribe();
     this.fetchCanciones();
   }
 
@@ -94,10 +104,11 @@ export class DataStorageService {
   * in the database.
   */
   storeSong(cancion: Cancion) {
+    console.log(this.loginService.user.accessToken);
     this.http
       .post(
         'http://localhost:8080/api/add_song',
-        cancion, this.httpOptions
+        cancion, {headers:this.headers}
       )
       .subscribe(response => {
         console.log(response);
@@ -111,23 +122,24 @@ export class DataStorageService {
   * @returns An observable array of songs  
   */
   fetchCanciones() {
+    console.log(123235234)
     return this.http
       .get<Cancion[]>(
-        'http://localhost:8080/api/get_songs'
-      )
-      .pipe(
-        map(canciones => {
-          return canciones.map(cancion => {
-            return {
-              ...cancion
-            };
-          });
-        }),
-        tap(canciones => {
-          this.cancionService.setCanciones(canciones);
-        })
+        'http://localhost:8080/api/get_songs', {headers:this.headers}
       )
   }
 
     //Streaming
+
+    /**
+  * @name fetchCanciones()
+  * @returns An observable array of songs  
+  */
+  getCancion(link: string) {
+    
+    return this.http
+      .get(
+        link, {headers:this.headers}
+      )
+  }
 }

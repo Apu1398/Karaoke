@@ -4,7 +4,7 @@ import { User } from "../models/user.model";
 @Injectable()
 export class LoginService {
   login = false;
-  user:User;
+  user = new User("1","1",["1"],"1","1");
 
   constructor() {
 

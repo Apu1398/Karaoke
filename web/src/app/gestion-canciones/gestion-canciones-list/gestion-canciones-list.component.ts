@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cancion } from 'src/app/models/cancion.model';
 import { CancionService } from 'src/app/services/cancion.service';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-gestion-canciones-list',
@@ -15,7 +16,8 @@ export class GestionCancionesListComponent implements OnInit {
 
   constructor(private cancionService: CancionService,
               private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              private dataStorageService: DataStorageService) {
   }
 
   ngOnInit() {
@@ -34,6 +36,15 @@ export class GestionCancionesListComponent implements OnInit {
   */
   onNewSong() {
     this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
+  actualizar(){
+    this.dataStorageService.fetchCanciones().
+      subscribe( canciones => {
+          this.canciones = canciones;
+          this.cancionService.setCanciones(this.canciones);
+          
+      });
   }
 
 

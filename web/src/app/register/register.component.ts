@@ -24,9 +24,9 @@ export class RegisterComponent implements OnInit {
    
   onSubmit() {      
     if (this.userForm.value.roles) {
-      this.userForm.value.roles = ["ROLE_PREMIUM"]
+      this.userForm.value.roles = ["premium"]
     } else {
-      this.userForm.value.roles = ["ROLE_USER"]
+      this.userForm.value.roles = ["user"]
     }
    
     this.user = this.userForm.value;
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
   */
    private initForm() {
     let username = '';
-    let pass = '';
+    let password = '';
     let email = '';
     let id = '';
     let roles = false;
@@ -53,7 +53,7 @@ export class RegisterComponent implements OnInit {
 
     this.userForm = new FormGroup({
       username: new FormControl(username, Validators.required),
-      pass: new FormControl(pass,Validators.required),
+      password: new FormControl(password,Validators.required),
       id: new FormControl(id),
       roles: new FormControl(roles),
       email: new FormControl(email, Validators.required)

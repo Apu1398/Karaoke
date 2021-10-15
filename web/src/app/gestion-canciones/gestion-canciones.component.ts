@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CancionService } from '../services/cancion.service';
+import { DataStorageService } from '../shared/data-storage.service';
 
 @Component({
   selector: 'app-gestion-canciones',
@@ -8,10 +9,16 @@ import { CancionService } from '../services/cancion.service';
 })
 export class GestionCancionesComponent implements OnInit {
 
-  constructor(private cancionService : CancionService) { }
+  constructor(private cancionService : CancionService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit(): void {
-   
+    this.dataStorageService.fetchCanciones().
+    subscribe( canciones => {
+        
+        this.cancionService.setCanciones(canciones);
+        
+    });
   }
 
 }

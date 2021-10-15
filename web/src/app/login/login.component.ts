@@ -28,15 +28,18 @@ export class LoginComponent implements OnInit {
     
 
     onSubmit(loginForm: NgForm) {  
-     
+      
       this.dataStorageService.sendLoginInfo(loginForm.value.username,loginForm.value.password).
       subscribe( user => {
+        
           this.user = user;
-          if (1 == 1) { // VERIFICACION DE SI EL MAE EXISTE
+            
             this.loginService.setUser(this.user);
+            console.log(this.user);
+            localStorage.setItem("token", this.user.accessToken);
             this.loginService.setLogin();
             this.router.navigate(['/gestion-canciones']);
-          }  
+          
       });
       
       
