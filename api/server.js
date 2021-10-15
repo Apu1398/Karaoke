@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require("path");
 const dbConfig = require("./app/config/db.config.js")
 
 const app = express();
@@ -64,6 +65,11 @@ function initial() {
     });
 }
 
+
+const staticPath = path.join(__dirname, "static");
+//Static file middleware
+//Uses express.static to server files from the static path
+app.use(express.static(staticPath));
 
 
 // routes
