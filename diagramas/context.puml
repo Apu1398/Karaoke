@@ -1,9 +1,9 @@
 @startuml Basic Sample
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
 
-Person(user, "Usuario")
+Person(user, "Usuario", "Usuarios de la plataforma Karaoke que consultan y crean canciones en el sistema")
 
-System(system, "System")
+System(system, "Karaoke WebApp", "Permite a los usuarios registrarse y consultar canciones, así como crear y actualizarlas")
 
 
 Rel(user, system, "Uses", "http")

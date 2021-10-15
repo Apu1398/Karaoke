@@ -1,0 +1,18 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "Usuario")
+System_Boundary(c1, "Karaoke webApp") {
+    Container(web_app, "Aplicación Single-page", "Angular, Typescript", $descr="Permite a los usuarios acceder a todas las funcionalidades de KaraokeWebApp mediante cualquier dispositivo con un navegador compatible ")
+    Container(Api, "Karaoke API", "NodeJS, EXPRESS", $descr=" Brinda las funcionalidades de KaraokeAPP")
+    ContainerDb(db, "Base de Datos", "MONGO DB", $descr="Almacena los datos de las canciones y usuarios en un base de datos NoSQL")
+    ContainerDb(files, "Archivos Estáticos", "EXPRESS", $descr="Almacena y brinda los archivos las canciones en un formato mp3")
+    }
+
+
+Rel(user, web_app, "Uses", "HTTP")
+Rel(web_app, Api, "Uses", "HTTP")
+Rel(Api, db, "Mongoose", "Reads From/ Writes to")
+Rel(Api, files, "Reads From")
+
+@enduml
