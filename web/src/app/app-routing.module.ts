@@ -7,7 +7,7 @@ import { GestionCancionesComponent } from './gestion-canciones/gestion-canciones
 import { KaraokeComponent } from './karaoke/karaoke.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { CancionResolverService } from './services/user-resolver.service';
+import { CancionResolverService } from './services/cancion-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,25 +16,25 @@ const routes: Routes = [
   {
     path: 'gestion-canciones',
     component: GestionCancionesComponent,
-   //resolve: [CancionResolverService],
+   resolve: [CancionResolverService],
     children: [
       { path: 'new', component: GestionCancionesEditComponent },
       {
         path: ':id',
         component: GestionCancionesDetailComponent,
-        //resolve: [CancionResolverService],
+        resolve: [CancionResolverService],
       },
       {
         path: ':id/edit',
         component: GestionCancionesEditComponent,
-        //resolve: [CancionResolverService],
+        resolve: [CancionResolverService],
       },
     ],
   },
   {
     path: 'karaoke',
     component: KaraokeComponent,
-    //resolve: [CancionResolverService],
+    resolve: [CancionResolverService],
   },
 ];
 

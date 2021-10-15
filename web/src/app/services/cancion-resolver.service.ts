@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot
+  RouterStateSnapshot,
 } from '@angular/router';
 import { Cancion } from '../models/cancion.model';
 import { DataStorageService } from '../shared/data-storage.service';
 import { CancionService } from './cancion.service';
-
-
 
 @Injectable({ providedIn: 'root' })
 export class CancionResolverService implements Resolve<Cancion[]> {
@@ -21,7 +19,9 @@ export class CancionResolverService implements Resolve<Cancion[]> {
     const canciones = this.cancionService.getCanciones();
 
     if (canciones.length === 0) {
-      return this.dataStorageService.fetchCanciones();
+      this.dataStorageService.fetchCanciones().subscribe((canciones) => {
+        this.cancionService.setCanciones(canciones);
+      });
     } else {
       return canciones;
     }

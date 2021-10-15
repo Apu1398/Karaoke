@@ -44,10 +44,10 @@ export class GestionCancionesDetailComponent implements OnInit {
   * @description Deletes the current song.
   */
   onDeleteSong() {
-    if (1 == 1) { // FALTA HACER VERIFICACION CON TOKEN!!!
+      console.log(this.cancion);
       this.router.navigate(['/gestion-canciones']);
-      this.dataStorageService.deleteSong(this.cancion.id_song);
-    }
+      this.dataStorageService.deleteSong(this.cancion._id);
+    
     
   }
 

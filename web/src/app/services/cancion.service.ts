@@ -77,6 +77,19 @@ export class CancionService {
     return this.canciones[index];
   }
 
+  getCancionX() {
+    return this.cancion;
+  }
+
+
+  getCancionByID(songID : string) {
+      this.canciones.forEach(cancion => {
+        if (cancion._id === songID){
+           this.cancion = cancion;
+        } 
+      });
+  }
+
   /**
    * @name deleteCancion()
    * @argument {number} index

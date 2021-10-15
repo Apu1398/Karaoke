@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const dbConfig = require("./app/config/db.config.js")
+const mediaserver = require('mediaserver')
 
 const app = express();
 
@@ -66,10 +67,10 @@ function initial() {
 }
 
 
-const staticPath = path.join(__dirname, "static");
-//Static file middleware
-//Uses express.static to server files from the static path
-app.use(express.static(staticPath));
+app.get('/:nombre', function(req, res) {
+    var cancion = path.join(__dirname, 'static', req.params.nombre);
+    mediaserver.pipe(req, res, cancion);
+})
 
 
 // routes

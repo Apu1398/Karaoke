@@ -39,16 +39,15 @@ export class GestionCancionesEditComponent implements OnInit {
   */
   onSubmit() {
     if (this.editMode) {
-      if (1==1){ // FALTA HACER VERIFICACION CON TOKEN
         this.dataStorageService.updateCancion(this.cancionForm.value);
-
-      }
-
-    } else { 
-      if (1==1) { // FALTA HACER VERIFICACION CON TOKEN
+    } else {     
         this.dataStorageService.storeSong(this.cancionForm.value);
-      }
     }
+    this.dataStorageService.fetchCanciones().
+    subscribe( canciones => {
+        this.cancionService.setCanciones(canciones);
+        
+    });
     this.onCancel();
   }
 
@@ -76,7 +75,7 @@ export class GestionCancionesEditComponent implements OnInit {
 
     if (this.editMode) {
       const cancion = this.cancionService.getCancion(this.id);
-      _id = cancion.id_song;
+      _id = cancion._id;
       name = cancion.name;
       artist = cancion.artist;
       album = cancion.album;
@@ -85,7 +84,7 @@ export class GestionCancionesEditComponent implements OnInit {
     }
 
     this.cancionForm = new FormGroup({
-      _id: new FormControl(_id, Validators.required),
+      _id: new FormControl(_id),
       name: new FormControl(name, Validators.required),
       artist: new FormControl(artist, Validators.required),
       album: new FormControl(album, Validators.required),

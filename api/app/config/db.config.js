@@ -1,5 +1,5 @@
 module.exports = {
-    HOST: "host.docker.internal", //"localhost",
+    HOST: "localhost", //"host.docker.internal",
     PORT: 27017,
     DB: "karaoke"
 };
