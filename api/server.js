@@ -23,8 +23,6 @@ const db = require("./app/models");
 const Role = db.role; // Handle the Role Model created in role.model.js
 
 
-if (process.env.NODE_ENV !== "test"){
-
 
 db.mongoose
     .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
@@ -39,8 +37,6 @@ db.mongoose
         console.error("Connection error", err);
         process.exit();
     });
-
-}
 
 
 //This function helps us to create 3 important rows in roles collection
@@ -84,6 +80,6 @@ require('./app/routes/user.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
-module.exports = app.listen(PORT, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
