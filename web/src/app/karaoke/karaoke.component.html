@@ -101,6 +101,10 @@
 ></audio>
 <div class="row">
   <div class="col-xs-12">
-    <div *ngIf="ready">{{ this.cancion.lyrics }}</div>
+    <div *ngIf="ready">
+      <textarea readonly rows="20" cols="50"> 
+        {{ this.cancion.lyrics }}
+      </textarea>
+      </div>
   </div>
 </div>

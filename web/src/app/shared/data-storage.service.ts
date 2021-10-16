@@ -36,13 +36,15 @@ export class DataStorageService {
   * @description  It sends an http get request to the backend wiht the info of the user's's registration.
   */
    sendRegisterInfo(user: User) {
+    console.log("Hola");
     const body = { username: user.username, email: user.email, password: user.password, roles: user.roles};
     this.http
     .post(
       'http://localhost:8080/api/auth/signup',
-      body, {headers:this.headers}
+      body
     )
     .subscribe(response => {
+      console.log("Registre");
       console.log(response);
     });      
   }
